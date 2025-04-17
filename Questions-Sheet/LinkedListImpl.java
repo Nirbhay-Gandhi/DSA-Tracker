@@ -117,3 +117,25 @@ public class Main
         lst.print();
 	}
 }
+
+/**
+	public Node reverseLL()
+	{
+		Node prev = null;
+		Node curr = head;
+		
+		while(curr != null)
+		{
+			System.out.println(curr);
+
+			Node nxt = curr.next;
+			
+			curr.next = prev;
+			prev = curr;
+			curr = nxt;
+		}
+		
+		head = prev;
+		return head;
+	}
+*/
