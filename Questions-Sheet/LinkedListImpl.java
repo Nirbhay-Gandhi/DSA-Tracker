@@ -3,6 +3,7 @@ class MyLinkedList
 	Node head;
 	private int size;
 	
+	//creating a Node class
 	class Node
 	{
 		String data;
@@ -15,6 +16,7 @@ class MyLinkedList
 		}
 	}
 	
+	//LinkedList constructor
 	MyLinkedList()
 	{
 		this.head = null;
@@ -89,53 +91,65 @@ class MyLinkedList
 		return val;
 	}
 	
-	public void print()
+	public String print()
 	{
+	    StringBuilder lstStr = new StringBuilder("");
+	    
 		Node temp = head;
 		while(temp != null)
 		{
-			System.out.print(temp.data + "->");
+			lstStr.append(temp.data + "->");
 			temp = temp.next;
+			//System.out.print(temp.data + "->");
 		}
-		System.out.print("NULL");
+		//System.out.print("NULL");
+		
+		
+		lstStr.append("NULL");
+        return lstStr.toString();
+	}
+	
+	public void reverse()
+	{
+	    if(head == null || head.next == null)
+	        return;
+	        
+	    Node prev = null, curr = head;
+	    while(curr != null)
+	    {
+	        Node nxt = curr.next;
+
+	        curr.next = prev;
+	        prev = curr;
+	        curr = nxt;
+	    }
+
+	    //update head to prev
+	    head = prev;
+	}
+	
+	public String toString()
+	{
+	    return this.print();
 	}
 }
+
+
 
 
 public class Main
 {
 	public static void main(String[] args) {
 		MyLinkedList lst = new MyLinkedList();
-        lst.add("T");
-        lst.add("I");
-        lst.add("G");
-        lst.add("E");
-        lst.add("R");
-
-        lst.addFirst("A");
-
-        lst.print();
+        lst.add("1");
+        lst.add("3");
+        lst.add("7");
+        lst.add("12");
+        
+        System.out.println(lst);
+        
+        lst.reverse();
+        
+        System.out.println(lst);
 	}
 }
-
-/**
-	public Node reverseLL()
-	{
-		Node prev = null;
-		Node curr = head;
-		
-		while(curr != null)
-		{
-			System.out.println(curr);
-
-			Node nxt = curr.next;
-			
-			curr.next = prev;
-			prev = curr;
-			curr = nxt;
-		}
-		
-		head = prev;
-		return head;
-	}
-*/
