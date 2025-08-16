@@ -172,14 +172,14 @@ class MyLinkedList
 	    Node prev = null, curr = head;
 	    while(curr != null)
 	    {
-	        Node nxt = curr.next;
+	        Node temp = curr.next;
 
 	        curr.next = prev;
 	        prev = curr;
-	        curr = nxt;
+	        curr = temp;
 	    }
 
-	    //update head to prev
+	    //update head to prev - since new head will be stored in prev
 	    head = prev;
 	}
 	
@@ -207,4 +207,35 @@ public class Main
         
         System.out.println(lst);
 	}
+}
+
+
+
+Node reverseList(Node head) 
+{
+	//base case
+	if(head == null || head.next == null)
+		return head;
+	
+	//recursive call - 
+	/**
+		we give the smaller linked list to recusrion to reverse. it reverses the 
+		smaller linkedlist and retrurns the newHead.
+	*/
+	Node newHead = reverseList(head.next);
+	
+	//small calc - inserting head at the end
+	/**
+		now, once we get the smaller linked list sorted, our jobs is to just 
+		insert the original head at the end
+	*/
+	Node temp = newHead;
+	while(temp.next != null)//reach to the last node
+	{
+		temp = temp.next;
+	}
+	temp.next = head;
+	head.next = null;
+	
+	return newHead;
 }
