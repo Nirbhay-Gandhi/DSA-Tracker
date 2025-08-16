@@ -56,6 +56,35 @@ class MyLinkedList
 		}
 		size++;
 	}
+
+    public void add(String data, int pos)
+    {
+        if(pos == 0)
+        {
+            Node newNode = new Node(data);
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        else
+        {
+            Node newNode = new Node(data);
+
+            //travell to the pos-1 index
+            Node temp = head;
+            int start = 0;
+            while(start < pos-1 && temp.next != null) //2nd cdn, if pos > length
+            {
+                start++;
+                temp = temp.next;
+            }
+
+            //update the pointers
+            if(temp.next != null)
+                newNode.next = temp.next;
+            temp.next = newNode;
+        }
+    }
 	
 	public String deleteFirst()
 	{
@@ -90,6 +119,32 @@ class MyLinkedList
 		temp.next = null;
 		return val;
 	}
+
+	public String delete(int pos)
+    {
+        if(head == null)
+            return -1;
+
+        if(pos == 0)
+        {
+            String data = head.data;
+            head = head.next;
+            return data;
+        }
+
+        int start = 0;
+        Node temp = head;
+        //reach to one node before the node you want to delete
+        while(start < pos-1 && temp.next.next != null) //2nd cdn, if pos > length
+        {
+            start++;
+            temp = temp.next;
+        }
+
+        String data = temp.next.data;
+        temp.next = temp.next.next;
+        return data;
+    }
 	
 	public String print()
 	{
